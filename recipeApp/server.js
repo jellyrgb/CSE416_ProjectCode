@@ -114,17 +114,6 @@ const importRecipesFromOpenAPI = async () => {
             );
           }
 
-          // // recipe_ingredients insert
-          // const ingredients = extractIngredientsFromRecipe(recipe);
-          // for (const ing of ingredients) {
-          //   await pool.query(
-          //     `INSERT INTO recipe_ingredients (recipe_id, ingredient_name, quantity)
-          //     VALUES ($1, $2, $3)
-          //     ON CONFLICT DO NOTHING`,
-          //     [recipe_id, ing.ingredient_name, ing.quantity]
-          //   );
-          // }
-
           // recipe_steps insert
           const steps = extractStepsFromRecipe(recipe);
           for (const step of steps) {
@@ -159,31 +148,6 @@ const extractNutritionFromRecipe = (recipe) => {
   };
 };
 
-// const extractIngredientsFromRecipe = (recipe) => {
-//   const raw = recipe.RCP_PARTS_DTLS;
-//   if (!raw) return [];
-
-//   const lines = raw.split('\n');
-//   const ingredients = [];
-
-//   for (const line of lines) {
-//     const items = line.split(',');
-//     for (let item of items) {
-//       item = item.trim();
-//       if (!item) continue;
-
-//       // 예: "연두부 75g(3/4모)"
-//       const match = item.match(/^([^\d\s,]+)\s*(.+)$/);
-//       if (match) {
-//         const name = match[1].trim();
-//         const quantity = match[2].trim();
-//         ingredients.push({ ingredient_name: name, quantity });
-//       }
-//     }
-//   }
-
-//   return ingredients;
-// };
 
 const extractStepsFromRecipe = (recipe) => {
   const steps = [];
